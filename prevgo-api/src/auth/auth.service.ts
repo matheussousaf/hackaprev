@@ -8,9 +8,9 @@ export class AuthService {
   constructor(private usersService: UserService) {}
 
   async validateUser(userInfo: LoginDto): Promise<any> {
-    const { username, password } = userInfo;
+    const { email, password } = userInfo;
 
-    const user = await this.usersService.findOne(username);
+    const user = await this.usersService.findOne(email);
     if (user && user.password === password) {
       const { password, ...result } = user;
       return result;
