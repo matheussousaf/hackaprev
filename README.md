@@ -1,3 +1,3 @@
-#PrevGO Api
+#PrevGO Projeto
 
 TODO: Descrição
