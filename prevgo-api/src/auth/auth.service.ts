@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { LoginDto } from 'src/auth/dto/user-login.dto';
 import { User } from 'src/user/user.entity';
@@ -7,22 +7,27 @@ import { User } from 'src/user/user.entity';
 export class AuthService {
   constructor(private usersService: UserService) {}
 
-  async validateUser(username: string, pass: string): Promise<any> {
+  async validateUser(userInfo: LoginDto): Promise<any> {
+    const { username, password } = userInfo;
+
     const user = await this.usersService.findOne(username);
-    if (user && user.password === pass) {
+    if (user && user.password === password) {
       const { password, ...result } = user;
       return result;
     }
-    return null;
+    throw new HttpException('Incorrect credentials.', HttpStatus.UNAUTHORIZED);
   }
 
   async login(userInfo: LoginDto) {
-    const { username, password } = userInfo;
-    const user = await this.validateUser(username, password);
-    return user;
+    return await this.validateUser(userInfo);
   }
 
   async register(user: User) {
-    return this.usersService.create(user);
+    try {
+      const savedUser = await this.usersService.create(user);
+      return savedUser;
+    } catch (err) {
+      throw new HttpException('User already exists.', HttpStatus.CONFLICT);
+    }
   }
 }

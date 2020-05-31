@@ -5,21 +5,25 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  
+  @Column({ default: '', nullable: false })
   firstName: string;
-
-  @Column()
+  
+  @Column({ default: '', nullable: false })
   lastName: string;
-
+  
   @Column({ default: 0 })
   totalInvested: number;
-
+  
   @Column({ default: 0 })
   averageInvestment: number;
   
-  @Column()
+  @Column({ nullable: false, unique: true })
   username: string;
 
-  @Column()
+  @Column({default: '', nullable: false})
+  email: string;
+
+  @Column({ nullable: false })
   password: string;
 }
