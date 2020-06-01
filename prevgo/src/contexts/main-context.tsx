@@ -7,13 +7,12 @@ import {User} from 'src/models/User';
 const MainContext = createContext({} as Auth);
 
 export const MainProvider: React.FC = ({children}) => {
-  const [user, setUser] = useState({} as User | null);
-
-  function x() {
-    console.log('Massa');
-  }
-
-  return <MainContext.Provider value={{user}}>{children}</MainContext.Provider>;
+  //   const [user, setUser] = useState({} as User | null);
+  //   function x() {
+  //     console.log('Massa');
+  //   }
+  //   return <MainContext.Provider value={{user}}>{children}</MainContext.Provider>;
+  return <></>;
 };
 
 export const useMainContext = () => useContext(MainContext);

@@ -3,12 +3,10 @@ import AuthRoute from './Auth/Auth';
 import {useAuthContext} from '../contexts/auth-context';
 import MainRoute from './Main/Main';
 
-// import { Container } from './styles';
-
 const Routes: React.FC = () => {
   const {user} = useAuthContext();
 
-  return user ? <MainRoute /> : <AuthRoute />;
+  return !user ? <MainRoute /> : <AuthRoute />;
 };
 
 export default Routes;

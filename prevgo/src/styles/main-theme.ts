@@ -2,7 +2,7 @@ import {DefaultTheme} from 'styled-components';
 
 export const LightColors = {
   main: '#2861a5',
-  secondary: '#f5d800',
+  secondary: '#efc100',
   white: '#e2e2e2',
   black: '#121212',
 };

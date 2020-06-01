@@ -12,12 +12,15 @@ import React from 'react';
 import {mainTheme} from './styles/main-theme';
 import {ThemeProvider} from 'styled-components';
 import Routes from './routes';
+import {AuthProvider} from './contexts/auth-context';
 
 const App: React.FC = () => {
   return (
     <>
       <ThemeProvider theme={mainTheme}>
-        <Routes />
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
       </ThemeProvider>
     </>
   );

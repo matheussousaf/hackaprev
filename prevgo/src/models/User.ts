@@ -1,8 +1,12 @@
 export interface User {
+  email: string;
   username: string;
   firstName: string;
   lastName: string;
   totalInvested: number;
   investmentAverage: number;
-  token: string;
+}
+
+export interface UserRegister extends User {
+  password: string;
 }
