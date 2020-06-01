@@ -6,7 +6,7 @@ import MainRoute from './Main/Main';
 const Routes: React.FC = () => {
   const {user} = useAuthContext();
 
-  return !user ? <MainRoute /> : <AuthRoute />;
+  return user ? <MainRoute /> : <AuthRoute />;
 };
 
 export default Routes;

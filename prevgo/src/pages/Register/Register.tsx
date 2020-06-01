@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import {useAuthContext} from '../../contexts/auth-context';
 import {Link} from '@react-navigation/native';
+import {UserRegister} from '../../models/User';
 
 const RegisterButtonTouchable = styled.TouchableOpacity`
   width: 90%;
@@ -72,12 +73,6 @@ const RegisterInput = styled.TextInput`
   font-family: Myriad Pro;
 `;
 
-interface RegisterProps {
-  name: string;
-  email: string;
-  password: string;
-}
-
 const Explorer = styled.Image`
   flex: 1;
   width: 500px;
@@ -92,30 +87,39 @@ const LinkToLoginContainer = styled(Link)`
 
 const Register: React.FC = () => {
   const {register} = useAuthContext();
-  const [info, setInfo] = useState({} as RegisterProps);
+  const [info, setInfo] = useState({} as UserRegister);
 
   return (
     <RegisterContainer>
       <Explorer source={require('../../../assets/img/explorer.png')} />
       <CustomText>Vamos começar nossa jornada!</CustomText>
       <InputBoxContainer>
-        <RegisterInput placeholder="E-mail" />
+        <RegisterInput
+          placeholder="E-mail"
+          value={info.email}
+          onChangeText={(text: string) => setInfo({...info, email: text})}
+        />
       </InputBoxContainer>
       <InputBoxContainer>
-        <RegisterInput placeholder="Seu Nome" />
+        <RegisterInput
+          placeholder="Seu Nome"
+          value={info.firstName}
+          onChangeText={(text: string) => setInfo({...info, firstName: text})}
+        />
       </InputBoxContainer>
       <InputBoxContainer>
-        <RegisterInput placeholder="Sua Senha" />
-      </InputBoxContainer>
-      <InputBoxContainer>
-        <RegisterInput placeholder="Confirme a Senha" />
+        <RegisterInput
+          placeholder="Sua Senha"
+          value={info.password}
+          secureTextEntry={true}
+          onChangeText={(text: string) => setInfo({...info, password: text})}
+        />
       </InputBoxContainer>
 
       <RegisterButton title="Registrar" onPress={() => register(info)} />
-      
-        <LinkToLoginContainer to="/Login">
-          Volte para o Login
-        </LinkToLoginContainer>
+      <LinkToLoginContainer to="/Login">
+        Volte para o Login
+      </LinkToLoginContainer>
     </RegisterContainer>
   );
 };
